@@ -1,0 +1,26 @@
+a {
+  &, &:hover, &:active, &:link, &:visited {
+    text-decoration: none;
+    color: black;
+  }
+}
+.header {
+  border-bottom: 1px solid #ccc;
+
+  nav {
+    ul {
+      display: inline;
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        padding: 0 5px;
+
+        a.active {
+          color: red
+        }
+      }
+    }
+  }
+}

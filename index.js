@@ -1,7 +1,14 @@
 var React = require('react');
+var Router = require('react-router');
+
+var Route = Router.Route;
+var NotFoundRoute = Router.NotFoundRoute;
+var DefaultRoute = Router.DefaultRoute;
+var Link = Router.Link;
+var RouteHandler = Router.RouteHandler;
 
 require('./styles/bootstrap.css');
-require('./styles/custom.css');
+require('./styles/custom.less');
 
 var Site = React.createClass({
   render: function() {
@@ -10,14 +17,29 @@ var Site = React.createClass({
         <div className="header">
           <nav>
             <ul className="nav nav-pills pull-right">
-              <li role="presentation" className="active"><a href="#">Home</a></li>
-              <li role="presentation"><a href="#">About</a></li>
-              <li role="presentation"><a href="#">Contact</a></li>
+              <li role="presentation"><Link to="home">Home</Link></li>
+              <li role="presentation"><Link to="about">About</Link></li>
+              <li role="presentation"><Link to="contact">Contact</Link></li>
             </ul>
           </nav>
           <h3 className="text-muted">Project name</h3>
         </div>
 
+        <RouteHandler />
+
+        <footer class="footer">
+          <p>&copy; Company 2014</p>
+        </footer>
+
+      </div>
+    );
+  }
+});
+
+var Home = React.createClass({
+  render: function () {
+    return (
+      <div>
         <div>
           <h1>Jumbotron heading</h1>
           <p className="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
@@ -46,14 +68,38 @@ var Site = React.createClass({
             <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
           </div>
         </div>
-
-        <footer class="footer">
-          <p>&copy; Company 2014</p>
-        </footer>
-
       </div>
     );
   }
 });
 
-React.render(<Site />, document.body);
+var About = React.createClass({
+  render: function() {
+    return (
+      <div>About</div>
+    );
+  }
+});
+
+var Contact = React.createClass({
+  render: function() {
+    return (
+      <div>Contact</div>
+    );
+  }
+})
+
+var routes = (
+  <Route name="app" path="/" handler={Site}>
+    <Route name="about" handler={About}/>
+    <Route name="home" handler={Home}/>
+    <Route name="contact" handler={Contact}/>
+
+    <DefaultRoute handler={Home}/>
+  </Route>
+);
+
+
+Router.run(routes, function (Handler) {
+  React.render(<Handler/>, document.body);
+});
