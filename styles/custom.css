@@ -1,0 +1,12 @@
+.header {
+  border-bottom: 1px solid #ccc;
+}
+.header nav ul {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.header nav ul li {
+  display: inline-block;
+  padding: 0 5px;
+}
