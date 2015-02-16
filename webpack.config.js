@@ -7,12 +7,8 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.react.js$/,
-        loader: 'jsx-loader',
-      },
-      {
         test: /\.js$/,
-        loader: 'jsx-loader',
+        loader: '6to5-loader!jsx-loader',
       },
       {
         test: /\.less$/,
